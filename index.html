@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dancing Ball</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas
+      id="canvas"
+      width="600"
+      height="400"
+      style="border: 1px solid"
+    ></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const drawing = canvas.getContext("2d");
+      let canvasWidth = canvas.width;
+      let canvasHeight = canvas.height;
+      let x = canvasWidth / 2;
+      let y = canvasHeight / 2;
+      let dx = 5;
+      let dy = 5;
+
+      function dancing() {
+        whiteRect();
+        drawing.beginPath();
+        drawing.arc(x, y, 10, 0, 2 * Math.PI);
+        drawing.closePath();
+        drawing.fillStyle = "#000";
+        x = x + dx;
+        y = y + dy;
+        if (x > canvasWidth - 10 || x < 10) {
+          dx = -1 * dx;
+        }
+        if (y > canvasHeight - 10 || y < 10) {
+          dy = -1 * dy;
+        }
+        drawing.fill();
+      }
+
+      function whiteRect() {
+        drawing.beginPath();
+        drawing.fillStyle = "#ffffff";
+        drawing.fillRect(0, 0, canvas.width, canvas.height);
+        drawing.closePath();
+        drawing.fill();
+      }
+      setInterval(dancing, 15);
+    </script>
+  </body>
+</html>
